@@ -1,0 +1,36 @@
+{
+    "name": "Python Docker PostgreSQL",
+    "image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
+    
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/postgresql:1": {
+            "version": "15"
+        }
+    },
+    
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    },
+    
+    "postCreateCommand": "pip install --upgrade pip && pip install -r requirements.txt",
+    
+    "forwardPorts": [5432, 8000],
+    
+    "portsAttributes": {
+        "5432": {
+            "label": "PostgreSQL",
+            "onAutoForward": "notify"
+        },
+        "8000": {
+            "label": "Web App",
+            "onAutoForward": "notify"
+        }
+    }
+}
